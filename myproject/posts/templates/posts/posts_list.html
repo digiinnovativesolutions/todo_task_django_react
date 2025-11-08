@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}Posts List{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>All Posts</h2>
+  {% if posts %}
+    <ul class="list-group">
+      {% for post in posts %}
+        <li class="list-group-item">
+          <strong>{{ post.title }}</strong><br>
+          {{ post.content|truncatewords:25 }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No posts available.</p>
+  {% endif %}
+</div>
+{% endblock %}
