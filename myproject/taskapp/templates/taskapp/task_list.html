@@ -1,0 +1,20 @@
+<!-- taskapp/templates/taskapp/task_list.html -->
+{% extends 'layout.html' %}
+{% block content %}
+  <h1>Task List</h1>
+  <ul>
+    {% for task in tasks %}
+      <li>
+        <a href="{% url 'taskapp:task_detail' task.pk %}">{{ task.title }}</a>
+        (Status: {{ task.status }} - Assignee: {{ task.assignee.username }})
+        {% if user.is_superuser %}
+          | <a href="{% url 'taskapp:task_update' task.pk %}">Update</a>
+          | <a href="{% url 'taskapp:task_delete' task.pk %}">Delete</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  {% if user.is_superuser %}
+    <a href="{% url 'taskapp:task_create' %}">Create Task</a>
+  {% endif %}
+{% endblock %}

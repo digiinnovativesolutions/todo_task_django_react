@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h1>{{ task.title }}</h1>
+  <p>{{ task.description }}</p>
+  <p>Assignee: {{ task.assignee.username }}</p>
+  <p>Status: {{ task.status }}</p>
+
+  <!-- Show update link to admin or assignee -->
+  {% if user.is_superuser or task.assignee == user %}
+    <a href="{% url 'taskapp:task_update' task.pk %}">Update</a>
+  {% endif %}
+
+  <!-- Only show delete link to admin -->
+  {% if user.is_superuser %}
+    <a href="{% url 'taskapp:task_delete' task.pk %}">Delete</a>
+  {% endif %}
+
+{% endblock %}

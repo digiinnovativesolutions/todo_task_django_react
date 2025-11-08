@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container my-5">
+  <h1 class="mb-4">Task Tracking</h1>
+
+  {% if tasks %}
+    <div class="list-group">
+      {% for task in tasks %}
+        <div class="list-group-item list-group-item-action mb-2 rounded shadow-sm">
+          <h5 class="mb-1">{{ task.title }}</h5>
+          <p class="mb-1">
+            <span class="badge bg-primary text-uppercase">{{ task.status }}</span>
+            <small class="text-muted">Created: {{ task.created_at|date:"M d, Y H:i" }}</small>
+            <small class="text-muted ms-3">Updated: {{ task.updated_at|date:"M d, Y H:i" }}</small>
+          </p>
+          <p class="mb-0"><strong>Remarks: </strong>{{ task.remarks|default:"No remarks" }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info" role="alert">
+      No tasks found.
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

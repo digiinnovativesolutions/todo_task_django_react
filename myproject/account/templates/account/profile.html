@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h4>{{ user.username }}’s Profile</h4>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Groups / Roles:</strong>
+      {% for g in user.groups.all %}
+        <span class="badge bg-secondary">{{ g.name }}</span>
+      {% empty %}
+        No groups assigned.
+      {% endfor %}
+    </p>
+    <form method="post" action="{% url 'account:logout' %}">
+      {% csrf_token %}
+      <button class="btn btn-danger">Logout</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

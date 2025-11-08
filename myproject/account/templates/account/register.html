@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="text-center mb-3">Create Account</h4>
+        <form method="post" action="{% url 'account:register' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="mb-3">
+            <label class="form-label">Role</label>
+            <select name="role" class="form-select">
+              <option value="Customer">Customer</option>
+             
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success w-100 mt-2">Register</button>
+        </form>
+        <p class="text-center mt-3">
+          Already have an account? <a href="{% url 'account:login' %}">Login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
